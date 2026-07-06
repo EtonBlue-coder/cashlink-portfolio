@@ -1,4 +1,7 @@
+import { localApi } from "./localApi.js";
+
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === "true";
 
 async function request(path, options = {}) {
   const res = await fetch(`${BASE_URL}${path}`, {
@@ -12,7 +15,7 @@ async function request(path, options = {}) {
   return res.json();
 }
 
-export const api = {
+const liveApi = {
   createUser: (name, email) =>
     request("/users", { method: "POST", body: JSON.stringify({ name, email }) }),
   getUser: (id) => request(`/users/${id}`),
@@ -25,3 +28,8 @@ export const api = {
   validateDeposit: (id) => request(`/deposits/${id}/validate`, { method: "POST" }),
   listUserDeposits: (userId) => request(`/deposits/user/${userId}`),
 };
+
+// En mode démo (build GitHub Pages, VITE_DEMO_MODE=true), aucun backend
+// n'est disponible : tout est simulé côté client via localStorage.
+// En développement local, l'app parle au vrai backend FastAPI.
+export const api = DEMO_MODE ? localApi : liveApi;

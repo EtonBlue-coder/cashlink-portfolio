@@ -104,6 +104,32 @@ L'app est disponible sur `http://localhost:5173`. Créer un compte de démo
 au premier lancement, puis tester le parcours de dépôt avec les points
 relais pré-remplis (dont "Family Arena Réunion").
 
+## Installer l'app sur ton téléphone
+
+CashLink est une **Progressive Web App (PWA)** : pas besoin de passer par
+un store, tu l'installes directement depuis le navigateur.
+
+1. Ouvre ce lien sur ton téléphone : **[lien GitHub Pages à activer — voir
+   plus bas]**
+2. Sur Android (Chrome) : menu ⋮ → "Ajouter à l'écran d'accueil"
+   Sur iPhone (Safari) : bouton Partager → "Sur l'écran d'accueil"
+3. L'icône CashLink apparaît sur ton écran d'accueil, l'app s'ouvre en
+   plein écran comme une app native.
+
+Cette version hébergée tourne en **mode démo autonome** : il n'y a pas de
+serveur derrière, tout est simulé et stocké uniquement dans le navigateur
+de ton téléphone (localStorage). C'est voulu — voir la
+[notice réglementaire](#notice-réglementaire) plus bas sur pourquoi un
+vrai service de dépôt ne peut pas tourner sans partenaire agréé.
+
+Une version buildée est aussi disponible en téléchargement direct dans les
+[Releases](../../releases) du dépôt (`cashlink-app-web.zip`), à héberger
+soi-même (voir le fichier `LISEZ-MOI.txt` à l'intérieur).
+
+*Remarque technique : ce dépôt ne fournit pas de fichier `.apk` Android
+natif — le construire nécessite Android Studio / le SDK Android. La PWA
+offre la même expérience d'installation sans cette lourdeur.*
+
 ## Limites de la démo
 
 Ce projet est un **prototype d'architecture et de parcours**, pas un

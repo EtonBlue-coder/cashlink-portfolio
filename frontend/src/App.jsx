@@ -109,6 +109,7 @@ export default function App() {
         </div>
         <p className="cl-body text-[11px] tracking-wide" style={{ color: "rgba(241,234,216,0.4)" }}>
           Démo — CashLink Réunion
+          {import.meta.env.VITE_DEMO_MODE === "true" && " · données simulées, stockées uniquement sur ton téléphone"}
         </p>
       </div>
     </div>
