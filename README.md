@@ -67,13 +67,18 @@ cashlink-portfolio/
 │   │   ├── schemas.py       # schémas Pydantic
 │   │   └── routers/         # users / relais / deposits
 │   ├── seed.py               # données de démo
+│   ├── Dockerfile
 │   └── requirements.txt
 ├── frontend/
 │   ├── src/
 │   │   ├── components/       # écrans de l'app (Accueil, Dépôt, Historique...)
-│   │   ├── api.js            # client API
+│   │   ├── api.js            # client API (bascule live/démo)
+│   │   ├── localApi.js       # backend simulé pour le mode démo (PWA)
 │   │   └── App.jsx
+│   ├── Dockerfile
 │   └── package.json
+├── docker-compose.yml
+├── .github/workflows/         # CI : déploiement Pages + publication Docker
 └── docs/                      # cahier des charges, captures d'écran
 ```
 
@@ -103,6 +108,35 @@ npm run dev
 L'app est disponible sur `http://localhost:5173`. Créer un compte de démo
 au premier lancement, puis tester le parcours de dépôt avec les points
 relais pré-remplis (dont "Family Arena Réunion").
+
+## Docker & GitHub Packages
+
+Le projet est aussi disponible en images Docker, publiées automatiquement
+sur GitHub Container Registry à chaque nouvelle release (voir l'onglet
+**Packages** du dépôt).
+
+### Lancer avec Docker Compose (recommandé pour tester en local)
+
+```bash
+docker compose up --build
+```
+
+- Backend disponible sur `http://localhost:8000`
+- Frontend disponible sur `http://localhost:8080`
+
+### Utiliser les images publiées directement
+
+```bash
+docker pull ghcr.io/etonblue-coder/cashlink-portfolio-backend:latest
+docker pull ghcr.io/etonblue-coder/cashlink-portfolio-frontend:latest
+
+docker run -p 8000:8000 ghcr.io/etonblue-coder/cashlink-portfolio-backend:latest
+docker run -p 8080:80 ghcr.io/etonblue-coder/cashlink-portfolio-frontend:latest
+```
+
+Une nouvelle image est construite et publiée automatiquement à chaque
+publication d'une release GitHub (voir
+`.github/workflows/publish-packages.yml`).
 
 ## Installer l'app sur ton téléphone
 
